@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@layer base {
+  * {
+    font-family: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: linear-gradient(135deg, #E7F2EF 0%, #A1C2BD 100%);
+    color: #19183B;
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .navbar {
+    @apply bg-brand-900/95 backdrop-blur-md text-brand-100 shadow-xl border-b border-brand-700/20;
+    background: linear-gradient(135deg, #19183B 0%, #708993 100%);
+  }
+
+  .card {
+    @apply rounded-3xl p-8 shadow-2xl bg-white/90 backdrop-blur-sm text-brand-900 border border-brand-400/20 hover:shadow-3xl transition-all duration-300 hover:scale-[1.02];
+    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(231,242,239,0.9) 100%);
+  }
+
+  .card-featured {
+    @apply rounded-3xl p-8 shadow-2xl text-brand-100 border border-brand-700/30 hover:shadow-3xl transition-all duration-300 hover:scale-[1.02];
+    background: linear-gradient(135deg, #19183B 0%, #708993 100%);
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-brand-700 to-brand-900 text-brand-100 hover:from-brand-900 hover:to-brand-700 rounded-xl px-6 py-3 font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 border border-brand-700/20;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-brand-400 to-brand-700 text-brand-100 hover:from-brand-700 hover:to-brand-400 rounded-xl px-6 py-3 font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105;
+  }
+
+  .btn-ghost {
+    @apply bg-white/80 backdrop-blur-sm text-brand-900 border border-brand-400/30 hover:bg-brand-400/20 hover:border-brand-700 hover:text-brand-900 rounded-xl px-6 py-3 font-semibold transition-all duration-300 shadow-md hover:shadow-lg transform hover:scale-105;
+  }
+
+  .btn-minimal {
+    @apply text-brand-700 hover:text-brand-900 hover:bg-brand-100/50 rounded-lg px-4 py-2 font-medium transition-all duration-200 backdrop-blur-sm;
+  }
+
+  .input {
+    @apply w-full rounded-xl bg-white/80 backdrop-blur-sm border border-brand-400/30 px-5 py-3 text-brand-900 placeholder:text-brand-700/70 focus:border-brand-700 focus:ring-4 focus:ring-brand-700/20 transition-all duration-300 shadow-sm focus:shadow-md;
+  }
+
+  .input-focus {
+    @apply focus:bg-white focus:scale-[1.02];
+  }
+
+  .section {
+    @apply max-w-6xl mx-auto px-6 sm:px-8 lg:px-12;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #19183B 0%, #708993 50%, #A1C2BD 100%);
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-900 to-brand-700 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+}
+
+@layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s ease-in-out infinite;
+  }
+
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(25, 24, 59, 0.25);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px); 
+  }
+  50% { 
+    transform: translateY(-20px); 
+  }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { 
+    opacity: 0.8; 
+  }
+  50% { 
+    opacity: 1; 
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 2s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.shadow-3xl {
+  box-shadow: 0 35px 60px -12px rgba(25, 24, 59, 0.25);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
