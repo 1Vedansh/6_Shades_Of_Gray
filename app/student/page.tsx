@@ -1,5 +1,12 @@
+"use client";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import LogoutButton from "@/components/LogoutButton";
+import StudentEventCard from "@/components/StudentEventCard";
 import { mockBlogPosts } from "@/lib/mockData";
+import { useEvents } from "@/context/EventContext";
+import { useBroadcasts } from "@/context/BroadcastContext";
+import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 import { 
   Users, 
@@ -11,10 +18,28 @@ import {
   Star,
   ArrowRight,
   Bell,
-  Search
+  Search,
+  Megaphone,  
+  ChevronRight,
+  Clock,
+  LogOut
 } from "lucide-react";
 
 export default function StudentDashboard() {
+  const { events } = useEvents();
+  const { broadcasts, loading: broadcastsLoading } = useBroadcasts();
+  const { logout } = useAuth();
+  const [expandedEventId, setExpandedEventId] = useState<string | null>(null);
+
+  const handleToggleExpand = (eventId: string) => {
+    setExpandedEventId(expandedEventId === eventId ? null : eventId);
+  };
+
+  // Get upcoming events (limit to 3 for dashboard)
+  const upcomingEvents = events.slice(0, 3);
+  
+  // Get recent broadcasts (limit to 3 for dashboard)
+  const recentBroadcasts = broadcasts.slice(0, 3);
   return (
     <>
       <Navbar />
@@ -31,8 +56,11 @@ export default function StudentDashboard() {
                 Your gateway to endless opportunities, meaningful connections, and knowledge sharing.
               </p>
             </div>
-            <div className="hidden lg:block animate-float">
-              <div className="w-32 h-32 rounded-full bg-brand-400/20 blur-xl"></div>
+            <div className="flex items-center gap-4">
+              <div className="hidden lg:block animate-float">
+                <div className="w-32 h-32 rounded-full bg-brand-400/20 blur-xl"></div>
+              </div>
+              <LogoutButton />
             </div>
           </div>
         </div>
@@ -114,6 +142,111 @@ export default function StudentDashboard() {
               );
             })}
           </div>
+        </div>
+
+        {/* Recent Announcements Section */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-gradient">Recent Announcements</h2>
+            <div className="flex items-center gap-2 text-brand-700">
+              <Megaphone className="h-5 w-5" />
+              <span className="text-sm font-medium">Admin Updates</span>
+            </div>
+          </div>
+          
+          {broadcastsLoading ? (
+            <div className="card text-center py-8">
+              <div className="w-6 h-6 border-2 border-brand-700 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+              <p className="text-brand-700">Loading announcements...</p>
+            </div>
+          ) : recentBroadcasts.length === 0 ? (
+            <div className="card text-center py-8">
+              <Megaphone className="h-12 w-12 mx-auto mb-3 text-brand-400" />
+              <h3 className="text-lg font-semibold text-brand-900 mb-2">No Recent Announcements</h3>
+              <p className="text-brand-700">Check back later for important updates from the alumni office.</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {recentBroadcasts.map(broadcast => {
+                const date = new Date(broadcast.dateTime);
+                const timeAgo = (() => {
+                  const diff = Date.now() - date.getTime();
+                  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                  const hours = Math.floor(diff / (1000 * 60 * 60));
+                  const minutes = Math.floor(diff / (1000 * 60));
+                  
+                  if (days > 0) return `${days}d ago`;
+                  if (hours > 0) return `${hours}h ago`;
+                  if (minutes > 0) return `${minutes}m ago`;
+                  return 'Just now';
+                })();
+
+                return (
+                  <div key={broadcast.id} className="card hover:shadow-lg transition-all duration-200">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-start gap-3 flex-1">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-r from-brand-700 to-brand-900 flex items-center justify-center flex-shrink-0">
+                          <Megaphone className="h-5 w-5 text-white" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-brand-900 mb-2">{broadcast.title}</h3>
+                          <div className="flex items-center gap-4 text-sm text-brand-700 mb-3">
+                            <div className="flex items-center gap-1">
+                              <Clock className="h-4 w-4" />
+                              <span>{timeAgo}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Users className="h-4 w-4" />
+                              <span>Batch {broadcast.fromYear === broadcast.toYear ? broadcast.fromYear : `${broadcast.fromYear}–${broadcast.toYear}`}</span>
+                            </div>
+                          </div>
+                          <p className="text-brand-700 line-clamp-2 leading-relaxed">
+                            {broadcast.body.split('\n')[0]}
+                          </p>
+                        </div>
+                      </div>
+                      <ChevronRight className="h-5 w-5 text-brand-400 flex-shrink-0 mt-1" />
+                    </div>
+                  </div>
+                );
+              })}
+              <div className="text-center">
+                <button className="btn-ghost">View All Announcements</button>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Upcoming Events Section */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-gradient">Upcoming Events</h2>
+            <Link href="/student/events" className="btn-minimal">
+              View All Events <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </div>
+          
+          {upcomingEvents.length === 0 ? (
+            <div className="card text-center py-12">
+              <Calendar className="h-16 w-16 mx-auto mb-4 text-brand-400" />
+              <h3 className="text-xl font-semibold text-brand-900 mb-2">No Upcoming Events</h3>
+              <p className="text-brand-700 mb-6">Check back later for exciting alumni events and gatherings.</p>
+              <Link href="/student/events" className="btn-primary">
+                Explore Events
+              </Link>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {upcomingEvents.map(event => (
+                <StudentEventCard 
+                  key={event.id}
+                  event={event} 
+                  isExpanded={expandedEventId === event.id}
+                  onToggleExpand={() => handleToggleExpand(event.id)}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Recent Activity & Featured Content */}

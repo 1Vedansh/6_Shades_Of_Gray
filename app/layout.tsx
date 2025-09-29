@@ -1,6 +1,9 @@
 import "./globals.css";
 import "./temp-styles.css";
 import { AuthProvider } from "@/context/AuthContext";
+import { EventProvider } from "@/context/EventContext";
+import { BroadcastProvider } from "@/context/BroadcastContext";
+import { BlogProvider } from "@/context/BlogContext";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -38,12 +41,18 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="antialiased min-h-screen" style={{background: 'linear-gradient(135deg, #E7F2EF 0%, #A1C2BD 100%)'}}>
+            <body className="antialiased min-h-screen bg-gradient-to-br from-brand-100 to-brand-400/20">
         <div className="min-h-screen flex flex-col">
           <AuthProvider>
-            <div style={{flexGrow: 1}}>
-              {children}
-            </div>
+            <EventProvider>
+              <BroadcastProvider>
+                <BlogProvider>
+                  <div className="flex-1">
+                    {children}
+                  </div>
+                </BlogProvider>
+              </BroadcastProvider>
+            </EventProvider>
           </AuthProvider>
         </div>
       </body>

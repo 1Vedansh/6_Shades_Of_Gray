@@ -1,0 +1,36 @@
+{
+  "broadcasts": [
+    {
+      "title": "ik",
+      "body": "dwg",
+      "fromYear": 2023,
+      "toYear": 2025,
+      "id": "bc_1759179202663_4hhvem1x8",
+      "dateTime": "2025-09-29T20:53:22.664Z"
+    },
+    {
+      "id": "bc_1",
+      "title": "Alumni Meet 2025 - Save the Date",
+      "body": "Dear Alumni,\n\nWe are excited to announce our annual Alumni Meet 2025 scheduled for October 10th, 2025. This year's theme is 'Innovation and Growth: Shaping Tomorrow Together'.\n\nEvent Details:\n- Date: October 10, 2025\n- Time: 10:00 AM - 6:00 PM\n- Venue: Main Campus Auditorium\n- Dress Code: Business Casual\n\nThe event will feature:\n✓ Keynote speeches from distinguished alumni\n✓ Panel discussions on industry trends\n✓ Networking sessions\n✓ Cultural performances\n✓ Awards ceremony\n✓ Gala dinner\n\nRegistration opens soon. Stay tuned for more details!\n\nBest regards,\nAlumni Relations Team",
+      "dateTime": "2025-09-20T10:30:00.000Z",
+      "fromYear": 2018,
+      "toYear": 2024
+    },
+    {
+      "id": "bc_2",
+      "title": "Career Guidance Session - Tech Industry",
+      "body": "Hello Recent Graduates!\n\nJoin us for an exclusive career guidance session focused on the technology industry. Our panel of successful alumni will share insights about:\n\n• Breaking into tech companies\n• Essential skills for 2025\n• Salary negotiation tips\n• Work-life balance in tech\n• Remote work opportunities\n\nSession Details:\n- Date: October 5, 2025\n- Time: 2:00 PM - 4:00 PM\n- Format: Virtual (Zoom link will be shared)\n\nPanelists include:\n- Sarah Chen, Senior Engineer at Google\n- Raj Patel, Product Manager at Microsoft\n- Maya Singh, CTO at TechStartup Inc.\n\nLimited seats available. Register now!\n\nQuestions? Reply to this message.\n\nCheers,\nCareer Services Team",
+      "dateTime": "2025-09-15T14:00:00.000Z",
+      "fromYear": 2020,
+      "toYear": 2023
+    },
+    {
+      "id": "bc_3",
+      "title": "Mentorship Program Launch",
+      "body": "Dear Alumni Community,\n\nWe're thrilled to launch our new Alumni Mentorship Program connecting experienced alumni with recent graduates and current students.\n\nProgram Highlights:\n• One-on-one mentoring relationships\n• Monthly virtual meetups\n• Industry-specific guidance\n• Career development workshops\n• Networking opportunities\n\nHow to participate:\n1. Fill out the mentor/mentee application\n2. Attend the orientation session\n3. Get matched with your mentor/mentee\n4. Begin your mentoring journey\n\nOrientation Session:\n- Date: September 30, 2025\n- Time: 6:00 PM - 7:30 PM\n- Venue: Virtual\n\nTogether, we can build a stronger alumni community!\n\nWarm regards,\nAlumni Mentorship Team",
+      "dateTime": "2025-09-10T09:15:00.000Z",
+      "fromYear": 2015,
+      "toYear": 2024
+    }
+  ]
+}

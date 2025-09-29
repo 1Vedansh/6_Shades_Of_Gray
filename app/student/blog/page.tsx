@@ -1,8 +1,10 @@
+"use client";
 import Navbar from "@/components/Navbar";
-import { mockBlogPosts } from "@/lib/mockData";
-import { BookOpen, Clock, User, Heart, MessageCircle, Share, Search, Filter } from "lucide-react";
+import { BookOpen, Clock, User, Heart, MessageCircle, Share, Search, Filter, Loader2, AlertCircle } from "lucide-react";
+import { useBlog } from "@/context/BlogContext";
 
 export default function StudentBlogPage() {
+  const { blogPosts, loading, error } = useBlog();
   return (
     <>
       <Navbar />
@@ -48,112 +50,150 @@ export default function StudentBlogPage() {
           </div>
         </div>
 
-        {/* Featured Post */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold text-gradient mb-6">Featured Story</h2>
-          <div className="card-featured">
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="md:col-span-2">
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="bg-brand-400 text-brand-900 text-xs px-3 py-1 rounded-full font-bold">
-                    FEATURED
-                  </span>
-                  <span className="text-brand-400 text-sm">Career Success</span>
-                </div>
-                <h3 className="text-3xl font-bold text-brand-100 mb-4">
-                  {mockBlogPosts[0].title}
-                </h3>
-                <p className="text-brand-100/90 text-lg leading-relaxed mb-6">
-                  {mockBlogPosts[0].body.substring(0, 200)}...
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-2 text-brand-400">
-                      <User className="h-4 w-4" />
-                      <span>{mockBlogPosts[0].author}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-brand-400">
-                      <Clock className="h-4 w-4" />
-                      <span>{mockBlogPosts[0].date}</span>
-                    </div>
+        {/* Loading State */}
+        {loading && (
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 text-brand-600 animate-spin mb-4" />
+            <p className="text-brand-700">Loading amazing stories...</p>
+          </div>
+        )}
+
+        {/* Error State */}
+        {error && (
+          <div className="flex flex-col items-center justify-center py-20">
+            <AlertCircle className="w-16 h-16 text-red-400 mb-4" />
+            <h3 className="text-lg font-medium text-brand-900 mb-2">Unable to Load Stories</h3>
+            <p className="text-brand-700 mb-4 text-center">{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="btn-primary"
+            >
+              Try Again
+            </button>
+          </div>
+        )}
+
+        {/* No Posts State */}
+        {!loading && !error && blogPosts.length === 0 && (
+          <div className="flex flex-col items-center justify-center py-20">
+            <BookOpen className="w-16 h-16 text-brand-300 mb-4" />
+            <h3 className="text-lg font-medium text-brand-900 mb-2">No Stories Yet</h3>
+            <p className="text-brand-700 text-center">Check back soon for inspiring alumni stories!</p>
+          </div>
+        )}
+
+        {/* Content when posts are available */}
+        {!loading && !error && blogPosts.length > 0 && (
+          <>
+
+          {/* Featured Post */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold text-gradient mb-6">Featured Story</h2>
+            <div className="card-featured">
+              <div className="grid md:grid-cols-3 gap-8">
+                <div className="md:col-span-2">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span className="bg-brand-400 text-brand-900 text-xs px-3 py-1 rounded-full font-bold">
+                      FEATURED
+                    </span>
+                    <span className="text-brand-400 text-sm">Career Success</span>
                   </div>
-                  <button className="btn-ghost">Read Full Story</button>
+                  <h3 className="text-3xl font-bold text-brand-100 mb-4">
+                    {blogPosts[0].title}
+                  </h3>
+                  <p className="text-brand-100/90 text-lg leading-relaxed mb-6">
+                    {blogPosts[0].body.substring(0, 200)}...
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <div className="flex items-center gap-2 text-brand-400">
+                        <User className="h-4 w-4" />
+                        <span>{blogPosts[0].author}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-brand-400">
+                        <Clock className="h-4 w-4" />
+                        <span>{new Date(blogPosts[0].dateTime).toLocaleDateString()}</span>
+                      </div>
+                    </div>
+                    <button className="btn-ghost">Read Full Story</button>
+                  </div>
                 </div>
-              </div>
-              <div className="hidden md:block">
-                <div className="w-full h-48 bg-brand-400/20 rounded-2xl flex items-center justify-center">
-                  <BookOpen className="h-16 w-16 text-brand-400/50" />
+                <div className="hidden md:block">
+                  <div className="w-full h-48 bg-brand-400/20 rounded-2xl flex items-center justify-center">
+                    <BookOpen className="h-16 w-16 text-brand-400/50" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Recent Articles */}
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-gradient">Latest Articles</h2>
-          <div className="text-sm text-brand-700">
-            {mockBlogPosts.length - 1} more articles
+          {/* Recent Articles */}
+          <div className="mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gradient">Latest Articles</h2>
+            <div className="text-sm text-brand-700">
+              {blogPosts.length - 1} more articles
+            </div>
           </div>
-        </div>
-        
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {mockBlogPosts.slice(1).map((post, i) => (
-            <article key={post.id} className="card group cursor-pointer hover:scale-[1.02] transition-all duration-300">
-              <div className="mb-4">
-                <div className="w-full h-32 bg-gradient-to-r from-brand-700/20 to-brand-400/20 rounded-xl flex items-center justify-center mb-4">
-                  <BookOpen className="h-8 w-8 text-brand-700/50" />
-                </div>
-                <h3 className="text-lg font-bold text-brand-900 mb-2 group-hover:text-brand-700 transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-brand-700 text-sm leading-relaxed mb-4">
-                  {post.body.substring(0, 120)}...
-                </p>
-              </div>
-              
-              <div className="border-t border-brand-400/20 pt-4">
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2 text-sm text-brand-700">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-brand-700 to-brand-900 flex items-center justify-center text-white text-xs font-bold">
-                      {post.author.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <div>
-                      <div className="font-medium">{post.author}</div>
-                      <div className="text-xs text-brand-700/70">{post.date}</div>
-                    </div>
+          
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {blogPosts.slice(1).map((post, i) => (
+              <article key={post.id} className="card group cursor-pointer hover:scale-[1.02] transition-all duration-300">
+                <div className="mb-4">
+                  <div className="w-full h-32 bg-gradient-to-r from-brand-700/20 to-brand-400/20 rounded-xl flex items-center justify-center mb-4">
+                    <BookOpen className="h-8 w-8 text-brand-700/50" />
                   </div>
+                  <h3 className="text-lg font-bold text-brand-900 mb-2 group-hover:text-brand-700 transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-brand-700 text-sm leading-relaxed mb-4">
+                    {post.body.substring(0, 120)}...
+                  </p>
                 </div>
                 
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4 text-brand-700">
-                    <button className="flex items-center gap-1 hover:text-brand-900 transition-colors">
-                      <Heart className="h-4 w-4" />
-                      <span className="text-sm">24</span>
-                    </button>
-                    <button className="flex items-center gap-1 hover:text-brand-900 transition-colors">
-                      <MessageCircle className="h-4 w-4" />
-                      <span className="text-sm">8</span>
-                    </button>
-                    <button className="flex items-center gap-1 hover:text-brand-900 transition-colors">
-                      <Share className="h-4 w-4" />
-                    </button>
+                <div className="border-t border-brand-400/20 pt-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2 text-sm text-brand-700">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-brand-700 to-brand-900 flex items-center justify-center text-white text-xs font-bold">
+                        {post.author.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <div className="font-medium">{post.author}</div>
+                        <div className="text-xs text-brand-700/70">{new Date(post.dateTime).toLocaleDateString()}</div>
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-xs text-brand-700 bg-brand-100 px-2 py-1 rounded-full">
-                    5 min read
-                  </span>
+                  
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4 text-brand-700">
+                      <button className="flex items-center gap-1 hover:text-brand-900 transition-colors">
+                        <Heart className="h-4 w-4" />
+                        <span className="text-sm">24</span>
+                      </button>
+                      <button className="flex items-center gap-1 hover:text-brand-900 transition-colors">
+                        <MessageCircle className="h-4 w-4" />
+                        <span className="text-sm">8</span>
+                      </button>
+                      <button className="flex items-center gap-1 hover:text-brand-900 transition-colors">
+                        <Share className="h-4 w-4" />
+                      </button>
+                    </div>
+                    <span className="text-xs text-brand-700 bg-brand-100 px-2 py-1 rounded-full">
+                      5 min read
+                    </span>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
-        </div>
+              </article>
+            ))}
+          </div>
 
-        {/* Load More */}
-        <div className="text-center mt-12">
-          <button className="btn-primary px-8 py-4">
-            Load More Stories
-          </button>
-        </div>
+          {/* Load More */}
+          <div className="text-center mt-12">
+            <button className="btn-primary px-8 py-4">
+              Load More Stories
+            </button>
+          </div>
+        </>
+        )}
       </main>
     </>
   );

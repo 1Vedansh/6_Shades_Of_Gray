@@ -1,5 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { getRole, setRole as setStoredRole } from "@/lib/auth";
 
 type Role = "student" | "admin" | null;
@@ -8,9 +9,22 @@ const AuthCtx = createContext<Ctx | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [role, setRole] = useState<Role>(null);
+  const router = useRouter();
+  
   useEffect(() => setRole(getRole()), []);
-  const login = (r: Role) => { setStoredRole(r); setRole(r); };
-  const logout = () => { setStoredRole(null); setRole(null); };
+  
+  const login = (r: Role) => { 
+    setStoredRole(r); 
+    setRole(r); 
+  };
+  
+  const logout = () => { 
+    setStoredRole(null); 
+    setRole(null);
+    // Redirect to home page after logout
+    router.push('/');
+  };
+  
   return <AuthCtx.Provider value={{ role, login, logout }}>{children}</AuthCtx.Provider>;
 }
 

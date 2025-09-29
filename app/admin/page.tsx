@@ -1,6 +1,9 @@
+"use client";
 import Navbar from "@/components/Navbar";
+import LogoutButton from "@/components/LogoutButton";
 import { mockBlogPosts } from "@/lib/mockData";
 import Link from "next/link";
+import { useAuth } from "@/context/AuthContext";
 import { 
   Calendar, 
   Radio, 
@@ -13,10 +16,13 @@ import {
   TrendingUp,
   MessageSquare,
   Eye,
-  Plus
+  Plus,
+  LogOut
 } from "lucide-react";
 
 export default function AdminDashboard() {
+  const { logout } = useAuth();
+  
   return (
     <>
       <Navbar />
@@ -34,8 +40,11 @@ export default function AdminDashboard() {
                 Manage the entire alumni ecosystem with powerful tools and insights at your fingertips.
               </p>
             </div>
-            <div className="hidden lg:block animate-float">
-              <div className="w-32 h-32 rounded-full bg-brand-400/20 blur-xl"></div>
+            <div className="flex items-center gap-4">
+              <div className="hidden lg:block animate-float">
+                <div className="w-32 h-32 rounded-full bg-brand-400/20 blur-xl"></div>
+              </div>
+              <LogoutButton />
             </div>
           </div>
         </div>

@@ -1,0 +1,77 @@
+{
+  "events": [
+    {
+      "id": "ev_1",
+      "title": "Alumni Meet 2025",
+      "type": "gathering",
+      "date": "2025-10-10",
+      "venue": "Main Auditorium",
+      "capacity": 300,
+      "rsvp": 125,
+      "description": "Join us for our annual alumni gathering where we celebrate achievements, network, and reconnect with old friends. Experience inspiring talks, delicious food, and memorable moments.",
+      "alumniList": [],
+      "dateTime": "2025-09-30T12:00:00.000Z",
+      "fromYear": null,
+      "toYear": null
+    },
+    {
+      "id": "ev_2",
+      "title": "Data Science Career Guidance Session",
+      "type": "guidance",
+      "date": "2025-11-05",
+      "venue": "Online",
+      "capacity": 50,
+      "rsvp": 32,
+      "description": "Get personalized career guidance from industry experts in data science. Learn about current trends, skill requirements, and career paths in this rapidly evolving field.",
+      "alumniList": [
+        "Sara Khan",
+        "Alice Patel"
+      ],
+      "dateTime": "2025-09-30T12:00:00.000Z",
+      "fromYear": null,
+      "toYear": null
+    },
+    {
+      "id": "ev_3",
+      "title": "Tech Industry Networking Event",
+      "type": "gathering",
+      "date": "2025-12-15",
+      "venue": "Tech Hub, Bangalore",
+      "capacity": 150,
+      "rsvp": 89,
+      "description": "Connect with fellow alumni working in the technology sector. Share experiences, explore collaboration opportunities, and expand your professional network.",
+      "alumniList": [],
+      "dateTime": "2025-09-30T12:00:00.000Z",
+      "fromYear": null,
+      "toYear": null
+    },
+    {
+      "title": "meet1",
+      "type": "gathering",
+      "date": "2025-10-08",
+      "venue": "audi",
+      "capacity": 100,
+      "description": "do come",
+      "alumniList": [],
+      "fromYear": null,
+      "toYear": null,
+      "id": "ev_1759178186010_4b3ho5veh",
+      "rsvp": 0,
+      "dateTime": "2025-09-29T20:36:26.010Z"
+    },
+    {
+      "title": "ok bro",
+      "type": "gathering",
+      "date": "2025-09-03",
+      "venue": "ok",
+      "capacity": 100,
+      "description": "hello",
+      "alumniList": [],
+      "fromYear": null,
+      "toYear": null,
+      "id": "ev_1759184525644_idumwe7sa",
+      "rsvp": 0,
+      "dateTime": "2025-09-29T22:22:05.644Z"
+    }
+  ]
+}

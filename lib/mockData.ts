@@ -29,9 +29,66 @@ export const mockAlumni = [
 ];
 
 export const mockEvents = [
-  { id: "ev_1", title: "Alumni Meet 2025", date: "2025-10-10", venue: "Main Auditorium", capacity: 300, rsvp: 125 },
-  { id: "ev_2", title: "Data Science Webinar", date: "2025-11-05", venue: "Online", capacity: 1000, rsvp: 642 }
+  { 
+    id: "ev_1", 
+    title: "Alumni Meet 2025", 
+    type: "gathering" as const,
+    date: "2025-10-10", 
+    venue: "Main Auditorium", 
+    capacity: 300, 
+    rsvp: 125,
+    description: "Join us for our annual alumni gathering where we celebrate achievements, network, and reconnect with old friends. Experience inspiring talks, delicious food, and memorable moments.",
+    alumniList: [],
+    dateTime: "2025-09-30T12:00:00.000Z",
+    fromYear: null,
+    toYear: null
+  },
+  { 
+    id: "ev_2", 
+    title: "Data Science Career Guidance Session", 
+    type: "guidance" as const,
+    date: "2025-11-05", 
+    venue: "Online", 
+    capacity: 50, 
+    rsvp: 32,
+    description: "Get personalized career guidance from industry experts in data science. Learn about current trends, skill requirements, and career paths in this rapidly evolving field.",
+    alumniList: ["Sara Khan", "Alice Patel"],
+    dateTime: "2025-09-30T12:00:00.000Z",
+    fromYear: null,
+    toYear: null
+  },
+  {
+    id: "ev_3",
+    title: "Tech Industry Networking Event",
+    type: "gathering" as const,
+    date: "2025-12-15",
+    venue: "Tech Hub, Bangalore",
+    capacity: 150,
+    rsvp: 89,
+    description: "Connect with fellow alumni working in the technology sector. Share experiences, explore collaboration opportunities, and expand your professional network.",
+    alumniList: [],
+    dateTime: "2025-09-30T12:00:00.000Z",
+    fromYear: null,
+    toYear: null
+  }
 ];
+
+export type EventType = "gathering" | "guidance";
+
+export interface Event {
+  id: string;
+  title: string;
+  type: EventType;
+  date: string;
+  venue: string;
+  capacity: number;
+  rsvp: number;
+  description: string;
+  alumniList: string[];
+  dateTime: string;
+  fromYear?: number | null;
+  toYear?: number | null;
+}
 
 export const mockMentorSlots = [
   { id: "ms_1", mentor: "Alice Patel", date: "2025-10-02", from: "16:00", to: "17:00", capacity: 3, booked: 2 },
