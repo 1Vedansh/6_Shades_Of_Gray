@@ -1,67 +1,127 @@
-# Alumni Nexus - Modern Alumni Engagement Platform
+# Alumni Nexus
 
-![Alumni Nexus](https://img.shields.io/badge/Alumni-Nexus-19183B?style=for-the-badge&logo=graduation-cap)
-![Next.js](https://img.shields.io/badge/Next.js-15.5.4-black?style=for-the-badge&logo=next.js)
-![React](https://img.shields.io/badge/React-19.1.1-61dafb?style=for-the-badge&logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue?style=for-the-badge&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38bdf8?style=for-the-badge&logo=tailwind-css)
+Alumni networking platform built with Next.js, React, and TypeScript.
 
-## 🎯 Overview
+## Tech Stack
 
-**Alumni Nexus** is a comprehensive, full-stack alumni engagement platform built with Next.js 15, React 19, and TypeScript. It serves as the ultimate hub where alumni connections flourish, knowledge flows, and futures are built through meaningful interactions and professional networking.
+- Next.js 15.5.4
+- React 19.1.1
+- TypeScript 5.9.2
+- Tailwind CSS 3.4.0
+- Lucide React (icons)
 
-### ✨ Key Highlights
+## Project Structure
 
-- **Modern Tech Stack**: Built with Next.js 15, React 19, and TypeScript for optimal performance
-- **Role-Based Access Control**: Separate dashboards and features for students and administrators
-- **Real-time Data Management**: Full CRUD operations with JSON-based database storage
-- **Responsive Design**: Beautiful, mobile-first UI with Tailwind CSS and custom animations
-- **Complete Feature Set**: Blog management, event planning, broadcast system, and alumni directory
+```
+app/
+├── layout.tsx          # Root layout with providers
+├── page.tsx            # Landing page
+├── login/              # Authentication
+├── admin/              # Admin dashboard
+│   ├── page.tsx       # Admin dashboard
+│   ├── blog/          # Blog management
+│   ├── broadcasts/    # Broadcast management
+│   └── events/        # Event management
+├── student/           # Student dashboard
+│   ├── page.tsx      # Student dashboard
+│   ├── blog/         # Blog reading
+│   ├── directory/    # Alumni directory
+│   ├── events/       # Event discovery
+│   └── mentorship/   # Mentorship booking
+└── api/              # API routes
+    ├── blogs/        # Blog CRUD
+    ├── broadcasts/   # Broadcast CRUD
+    └── events/       # Event CRUD
 
-## 🚀 Features
+components/           # React components
+context/             # Context providers
+lib/                 # Utilities and services
+├── database/        # JSON database files
+└── mockData.ts      # Sample data
+```
 
-### 🏠 **Landing Page & Authentication**
-- **Hero Section**: Stunning gradient hero with floating animations and call-to-action
-- **Feature Overview**: Comprehensive display of platform capabilities
-- **Role-Based Login**: Secure authentication system for students and administrators
-- **Dynamic Navigation**: Context-aware navbar that adapts to user roles
+## Features
 
-### 👨‍🎓 **Student Dashboard**
-- **Personal Dashboard**: Customized overview with recent activities and announcements
-- **Alumni Directory**: Browse and connect with fellow alumni by graduation year, branch, and company
-- **Event Discovery**: View and RSVP to alumni events, career guidance sessions, and networking meetups
-- **Blog Access**: Read inspiring alumni stories and career guidance articles
-- **Mentorship Platform**: Book mentorship sessions with experienced alumni
-- **Broadcast Notifications**: Receive important announcements and updates
+### Authentication
+- Role-based login (student/admin)
+- Context-based auth state management
 
-### 👨‍💼 **Admin Command Center**
-- **Administrative Dashboard**: Comprehensive overview with analytics and quick actions
-- **Event Management**: Create, schedule, and manage alumni events with capacity tracking
-- **Broadcast Center**: Send targeted announcements to specific graduation year ranges
-- **Content Management**: Manage blog posts, feature stories, and moderate content
-- **User Analytics**: View engagement metrics and platform insights
-- **Quick Actions**: Streamlined access to common administrative tasks
+### Student Features
+- Dashboard with announcements
+- Alumni directory browsing
+- Event discovery and RSVP
+- Blog reading
+- Mentorship booking
 
-### 📝 **Blog & Content System**
-- **Dynamic Blog Platform**: Full-featured blog system with CRUD operations
-- **Content Filtering**: Filter posts by date range and search functionality
-- **Author Profiles**: Rich author information with graduation details
-- **Featured Content**: Highlight important stories and announcements
-- **Responsive Cards**: Beautiful card-based layout for optimal readability
+### Admin Features
+- Event creation and management
+- Broadcast system for announcements
+- Blog content management
+- User analytics dashboard
 
-### 📅 **Event Management**
-- **Event Creation**: Comprehensive event creation with venue, capacity, and description
-- **Event Types**: Support for gatherings, guidance sessions, and specialized events
-- **RSVP Tracking**: Real-time capacity management and attendee tracking
-- **Event Filtering**: Search and filter events by date, type, and availability
-- **Alumni Integration**: Link events to specific graduation year ranges
+### Data Management
+- JSON-based file storage
+- Full CRUD operations via API routes
+- Real-time updates with React Context
 
-### 📢 **Broadcast System**
-- **Targeted Messaging**: Send announcements to specific graduation year cohorts
-- **Rich Content**: Support for formatted messages with titles and detailed content
-- **Date Management**: Automatic timestamping and chronological organization
-- **Cross-Platform Sync**: Broadcasts appear on both admin and student interfaces
-- **Real-time Updates**: Instant synchronization across all connected clients
+## Setup
+
+### Prerequisites
+- Node.js 18.0+
+- npm 9.0+
+
+### Installation
+```bash
+npm install
+```
+
+### Development
+```bash
+npm run dev
+```
+Open http://localhost:3000
+
+### Production
+```bash
+npm run build
+npm start
+```
+
+## API Routes
+
+### Blogs
+- `GET /api/blogs` - Get all blogs
+- `POST /api/blogs` - Create blog
+- `GET /api/blogs/[id]` - Get blog by ID
+- `PUT /api/blogs/[id]` - Update blog
+- `DELETE /api/blogs/[id]` - Delete blog
+
+### Events
+- `GET /api/events` - Get all events
+- `POST /api/events` - Create event
+- `GET /api/events/[id]` - Get event by ID
+- `PUT /api/events/[id]` - Update event
+- `DELETE /api/events/[id]` - Delete event
+
+### Broadcasts
+- `GET /api/broadcasts` - Get all broadcasts
+- `POST /api/broadcasts` - Create broadcast
+- `GET /api/broadcasts/[id]` - Get broadcast by ID
+- `PUT /api/broadcasts/[id]` - Update broadcast
+- `DELETE /api/broadcasts/[id]` - Delete broadcast
+
+## Database
+
+Uses JSON files for data storage:
+- `lib/database/blogs.json`
+- `lib/database/events.json`
+- `lib/database/broadcasts.json`
+
+## Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm start` - Start production server
 
 ## 🛠️ Technology Stack
 
@@ -385,17 +445,6 @@ npm run build
 - [ ] **CDN Integration**: Optimized asset delivery
 - [ ] **Progressive Web App**: PWA features for mobile experience
 
-## 📄 License
-
-This project is licensed under the ISC License. See the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- **Next.js Team**: For the incredible framework and developer experience
-- **Tailwind CSS**: For the utility-first CSS framework
-- **Lucide**: For the beautiful icon library
-- **React Team**: For the powerful UI library
-- **TypeScript Team**: For type safety and developer tooling
 
 ---
 
