@@ -1,4 +1,4 @@
-# Alumni Nexus
+# Alumni Nexus (For internal hackathon)
 
 Alumni networking platform built with Next.js, React, and TypeScript.
 
@@ -389,4 +389,5 @@ DELETE /api/broadcasts/[id] # Delete broadcast
 **Version**: 1.0.0  
 **Last Updated**: September 30, 2025  
 **Minimum Node.js**: 18.0+  
+
 **License**: ISC
